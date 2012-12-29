@@ -81,3 +81,10 @@ class TestGfm(TestCase):
 
         1. bar
         """, ['gfm'])
+
+    def test_autolink(self):
+        self.assert_renders("""
+        <p><a href="http://foo.com/bar">http://foo.com/bar</a></p>
+        """, """
+        http://foo.com/bar
+        """, ['gfm'])
