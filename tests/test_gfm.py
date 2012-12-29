@@ -2,16 +2,13 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-import re
-import unittest
+from test_case import TestCase
 
-import markdown
-
-class TestGfm(unittest.TestCase):
+class TestGfm(TestCase):
     def test_fenced_code(self):
         self.assert_renders("""
-        <pre><code>foo
-        </code></pre>
+        <div class="highlight"><pre>foo
+        </pre></div>
         """, """
         ```
         foo
@@ -61,8 +58,12 @@ class TestGfm(unittest.TestCase):
         Content Cell  | Content Cell
         """, ['gfm'])
 
-    def assert_renders(self, expected, source, extensions):
-        expected = re.sub(r'^ {8}', '', expected.strip(), flags=re.MULTILINE)
-        source = re.sub(r'^ {8}', '', source.strip(), flags=re.MULTILINE)
-        self.assertEqual(
-            expected, markdown.markdown(source, extensions=extensions))
+    def test_hilite(self):
+        self.assert_renders("""
+        <div class="highlight"><pre><span class="k">def</span>
+        </pre></div>
+        """, """
+        ```.python
+        def
+        ```
+        """, ['gfm'])
