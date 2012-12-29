@@ -9,6 +9,7 @@ from markdown.extensions.smart_strong import SmartEmphasisExtension
 from markdown.extensions.tables import TableExtension
 
 from autolink import AutolinkExtension
+from automail import AutomailExtension
 from hidden_hilite import HiddenHiliteExtension
 from semi_sane_lists import SemiSaneListExtension
 
@@ -27,6 +28,7 @@ class GithubFlavoredMarkdownExtension(Extension):
 
         # Custom extensions
         AutolinkExtension().extendMarkdown(md, md_globals)
+        AutomailExtension().extendMarkdown(md, md_globals)
         HiddenHiliteExtension([
             ('guess_lang', 'False'),
             ('css_class', 'highlight')

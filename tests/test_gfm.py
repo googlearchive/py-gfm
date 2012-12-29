@@ -88,3 +88,10 @@ class TestGfm(TestCase):
         """, """
         http://foo.com/bar
         """, ['gfm'])
+
+    def test_automail(self):
+        self.assert_renders("""
+        <p><a href="mailto:foo@bar.com">foo@bar.com</a></p>
+        """, """
+        foo@bar.com
+        """, ['gfm'])
