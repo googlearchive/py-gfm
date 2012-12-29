@@ -9,6 +9,7 @@ from markdown.extensions.smart_strong import SmartEmphasisExtension
 from markdown.extensions.tables import TableExtension
 
 from hidden_hilite import HiddenHiliteExtension
+from semi_sane_lists import SemiSaneListExtension
 
 def makeExtension(configs=None):
     return GithubFlavoredMarkdownExtension(configs=configs)
@@ -28,3 +29,4 @@ class GithubFlavoredMarkdownExtension(Extension):
             ('guess_lang', 'False'),
             ('css_class', 'highlight')
         ]).extendMarkdown(md, md_globals)
+        SemiSaneListExtension().extendMarkdown(md, md_globals)

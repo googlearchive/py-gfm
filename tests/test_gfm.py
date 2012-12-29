@@ -67,3 +67,17 @@ class TestGfm(TestCase):
         def
         ```
         """, ['gfm'])
+
+    def test_semi_sane_lists(self):
+        self.assert_renders("""
+        <ul>
+        <li>foo</li>
+        </ul>
+        <ol>
+        <li>bar</li>
+        </ol>
+        """, """
+        * foo
+
+        1. bar
+        """, ['gfm'])
