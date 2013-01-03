@@ -8,10 +8,7 @@ from markdown.extensions.nl2br import Nl2BrExtension
 from markdown.extensions.smart_strong import SmartEmphasisExtension
 from markdown.extensions.tables import TableExtension
 
-from autolink import AutolinkExtension
-from automail import AutomailExtension
-from hidden_hilite import HiddenHiliteExtension
-from semi_sane_lists import SemiSaneListExtension
+import gfm
 
 def makeExtension(configs=None):
     return GithubFlavoredMarkdownExtension(configs=configs)
@@ -27,10 +24,10 @@ class GithubFlavoredMarkdownExtension(Extension):
         TableExtension().extendMarkdown(md, md_globals)
 
         # Custom extensions
-        AutolinkExtension().extendMarkdown(md, md_globals)
-        AutomailExtension().extendMarkdown(md, md_globals)
-        HiddenHiliteExtension([
+        gfm.AutolinkExtension().extendMarkdown(md, md_globals)
+        gfm.AutomailExtension().extendMarkdown(md, md_globals)
+        gfm.HiddenHiliteExtension([
             ('guess_lang', 'False'),
             ('css_class', 'highlight')
         ]).extendMarkdown(md, md_globals)
-        SemiSaneListExtension().extendMarkdown(md, md_globals)
+        gfm.SemiSaneListExtension().extendMarkdown(md, md_globals)

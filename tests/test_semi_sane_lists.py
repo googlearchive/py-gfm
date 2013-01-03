@@ -2,13 +2,13 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-from mdx_gfm.semi_sane_lists import SemiSaneListExtension
+import gfm
 
 from test_case import TestCase
 
 class TestSemiSaneLists(TestCase):
     def setUp(self):
-        self.semi_sane_lists = SemiSaneListExtension([])
+        self.semi_sane_lists = gfm.SemiSaneListExtension([])
 
     def test_doesnt_join_ul_and_ol(self):
         self.assert_renders("""
