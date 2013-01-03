@@ -2,13 +2,13 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-from mdx_gfm.autolink import AutolinkExtension
+import gfm
 
 from test_case import TestCase
 
 class TestAutolink(TestCase):
     def setUp(self):
-        self.autolink = AutolinkExtension([])
+        self.autolink = gfm.AutolinkExtension([])
 
     def test_autolinks_obvious_links(self):
         self.assert_renders("""

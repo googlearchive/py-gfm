@@ -2,13 +2,13 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-from mdx_gfm.automail import AutomailExtension
+import gfm
 
 from test_case import TestCase
 
 class TestAutomail(TestCase):
     def setUp(self):
-        self.automail = AutomailExtension()
+        self.automail = gfm.AutomailExtension()
 
     def test_automails_obvious_mails(self):
         self.assert_renders("""

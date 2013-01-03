@@ -2,35 +2,27 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-from markdown.extensions import Extension
-from markdown.extensions.fenced_code import FencedCodeExtension
 from markdown.extensions.nl2br import Nl2BrExtension
-from markdown.extensions.smart_strong import SmartEmphasisExtension
-from markdown.extensions.tables import TableExtension
 
-from autolink import AutolinkExtension
-from automail import AutomailExtension
-from hidden_hilite import HiddenHiliteExtension
-from semi_sane_lists import SemiSaneListExtension
+from mdx_partial_gfm import PartialGithubFlavoredMarkdownExtension
 
 def makeExtension(configs=None):
     return GithubFlavoredMarkdownExtension(configs=configs)
 
-class GithubFlavoredMarkdownExtension(Extension):
-    """An extension that's as compatible as possible with GFM."""
+class GithubFlavoredMarkdownExtension(PartialGithubFlavoredMarkdownExtension):
+    """An extension that's as compatible as possible with GFM.
+
+    This extension aims to be compatible with the standard GFM that GitHub uses
+    for comments and issues. It has all the extensions described in the `GFM
+    documentation`_, except for intra-Github links to commits, repostiories, and
+    issues.
+
+    Note that Markdown-formatted gists and files (including READMEs) on GitHub
+    use a slightly different variant of GFM. For that, use
+    :class:`~mdx_partial_gfm.PartialGithubFlavoredMarkdownExtension`.
+    """
 
     def extendMarkdown(self, md, md_globals):
-        # Built-in extensions
-        FencedCodeExtension().extendMarkdown(md, md_globals)
-        Nl2BrExtension().extendMarkdown(md, md_globals)
-        SmartEmphasisExtension().extendMarkdown(md, md_globals)
-        TableExtension().extendMarkdown(md, md_globals)
+        PartialGithubFlavoredMarkdownExtension.extendMarkdown(self, md, md_globals)
 
-        # Custom extensions
-        AutolinkExtension().extendMarkdown(md, md_globals)
-        AutomailExtension().extendMarkdown(md, md_globals)
-        HiddenHiliteExtension([
-            ('guess_lang', 'False'),
-            ('css_class', 'highlight')
-        ]).extendMarkdown(md, md_globals)
-        SemiSaneListExtension().extendMarkdown(md, md_globals)
+        Nl2BrExtension().extendMarkdown(md, md_globals)

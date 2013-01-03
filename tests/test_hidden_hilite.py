@@ -2,13 +2,13 @@
 # for details. All rights reserved. Use of this source code is governed by a
 # BSD-style license that can be found in the LICENSE file.
 
-from mdx_gfm.hidden_hilite import HiddenHiliteExtension
+import gfm
 
 from test_case import TestCase
 
 class TestHiddenHilite(TestCase):
     def setUp(self):
-        self.hidden_hilite = HiddenHiliteExtension([])
+        self.hidden_hilite = gfm.HiddenHiliteExtension([])
 
     def test_doesnt_highlight_code_blocks(self):
         self.assert_renders("""
