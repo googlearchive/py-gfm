@@ -30,3 +30,10 @@ class TestStrikethrough(TestCase):
         """, """
         ~~**outer**~~, **~~inner~~**.
         """, [self.strikethrough])
+
+    def test_extra_tildes_dont_cause_strikethrough(self):
+        self.assert_renders("""
+        <p>~~~foo~~~, ~~~bar~~, ~~~~baz~~~~</p>
+        """, """
+        ~~~foo~~~, ~~~bar~~, ~~~~baz~~~~
+        """, [])
