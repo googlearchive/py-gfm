@@ -26,4 +26,8 @@ class TestCase(unittest.TestCase):
         This removes 8 characters of indentation as well as the leading and
         trailing newlines.
         """
-        return re.sub(r'^ {8}', '', text, flags=re.MULTILINE)[1:-1]
+        markdown_text = ''
+
+        for i in text.split('\n'):
+            markdown_text = re.sub(r'^ {8}', '', i)[1:-1]
+        return markdown_text

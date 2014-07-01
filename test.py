@@ -8,7 +8,12 @@ import os
 import sys
 import subprocess
 
-import unittest
+from unittest import TextTestRunner
+
+try:
+    from unittest import loader
+except ImportError:
+    from unittest2 import loader
 
 USAGE = """%prog
 Run unit tests."""
@@ -25,7 +30,7 @@ if len(args) > 0:
     sys.exit(1)
 
 test_path = os.path.join(os.path.dirname(__file__), 'tests')
-loader = unittest.loader.TestLoader()
+loader = loader.TestLoader()
 if options.name: loader.testMethodPrefix = options.name
-unittest.TextTestRunner(verbosity = 2).run(loader.discover(test_path))
+TextTestRunner(verbosity = 2).run(loader.discover(test_path))
 

@@ -8,7 +8,7 @@ setup(
     url='https://github.com/dart-lang/py-gfm',
     packages=find_packages(),
     include_package_data = True,
-    install_requires = ['setuptools', 'markdown'],
+    install_requires = ['setuptools', 'markdown', 'unittest2'],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
