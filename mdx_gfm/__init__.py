@@ -6,8 +6,8 @@ from markdown.extensions.nl2br import Nl2BrExtension
 
 from mdx_partial_gfm import PartialGithubFlavoredMarkdownExtension
 
-def makeExtension(configs=None):
-    return GithubFlavoredMarkdownExtension(configs=configs)
+def makeExtension(*args, **kwargs):
+    return GithubFlavoredMarkdownExtension(*args, **kwargs)
 
 class GithubFlavoredMarkdownExtension(PartialGithubFlavoredMarkdownExtension):
     """An extension that's as compatible as possible with GFM.
