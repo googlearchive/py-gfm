@@ -9,8 +9,8 @@ from markdown.extensions.tables import TableExtension
 
 import gfm
 
-def makeExtension(configs=None):
-    return PartialGithubFlavoredMarkdownExtension(configs=configs)
+def makeExtension(*args, **kwargs):
+    return PartialGithubFlavoredMarkdownExtension(*args, **kwargs)
 
 class PartialGithubFlavoredMarkdownExtension(Extension):
     """An extension that's as compatible as possible with GFM.
