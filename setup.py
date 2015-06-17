@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='py-gfm',
-    version='0.1.0',
+    version='0.1.1',
     description='An implementation of Github-Flavored Markdown written as an extension to the Python Markdown library.',
     author='Dart Team',
     author_email='misc@dartlang.org',
