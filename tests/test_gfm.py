@@ -6,14 +6,22 @@ from test_case import TestCase
 
 class TestGfm(TestCase):
     def test_fenced_code(self):
-        self.assert_renders("""
-        <div class="highlight"><pre>foo
-        </pre></div>
-        """, """
+        test_text = """
         ```
         foo
         ```
-        """, ['gfm'])
+        """
+        extensions = ['gfm']
+        if self.has_pygments:
+            self.assert_renders("""
+        <div class="highlight"><pre>foo
+        </pre></div>
+        """, test_text, extensions)
+        else:
+            self.assert_renders("""
+        <pre class="highlight"><code>foo</code></pre>
+        """, test_text, extensions)
+            
 
     def test_nl2br(self):
         self.assert_renders("""
@@ -59,14 +67,22 @@ class TestGfm(TestCase):
         """, ['gfm'])
 
     def test_hilite(self):
-        self.assert_renders("""
-        <div class="highlight"><pre><span class="k">def</span>
-        </pre></div>
-        """, """
+        test_text = """
         ```.python
         def
         ```
-        """, ['gfm'])
+        """
+        extensions = ['gfm']
+
+        if self.has_pygments:
+            self.assert_renders("""
+        <div class="highlight"><pre><span class="k">def</span>
+        </pre></div>
+        """, test_text, extensions)
+        else:
+            self.assert_renders("""
+        <pre class="highlight"><code class="language-python">def</code></pre>
+        """, test_text, extensions)
 
     def test_semi_sane_lists(self):
         self.assert_renders("""

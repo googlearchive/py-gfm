@@ -8,6 +8,13 @@ import unittest
 import markdown
 
 class TestCase(unittest.TestCase):
+    def setUp(self):
+        self.has_pygments = True
+        try:
+            import pygments  # noqa
+        except ImportError:
+            self.has_pygments = False
+
     def assert_renders(self, expected, source, extensions):
         """Asserts that one markdown string renders as expected.
 

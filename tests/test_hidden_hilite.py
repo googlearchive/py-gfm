@@ -8,6 +8,7 @@ from test_case import TestCase
 
 class TestHiddenHilite(TestCase):
     def setUp(self):
+        TestCase.setUp(self)
         self.hidden_hilite = gfm.HiddenHiliteExtension([])
 
     def test_doesnt_highlight_code_blocks(self):
@@ -39,11 +40,18 @@ class TestHiddenHilite(TestCase):
         """, [self.hidden_hilite])
 
     def test_does_highlight_fenced_blocks(self):
-        self.assert_renders("""
-        <div class="codehilite"><pre><span class="k">def</span>
-        </pre></div>
-        """, """
+        test_text = """
         ```python
         def
         ```
-        """, [self.hidden_hilite, 'fenced_code'])
+        """
+        extensions = [self.hidden_hilite, 'fenced_code']
+        if self.has_pygments:
+            self.assert_renders("""
+        <div class="codehilite"><pre><span class="k">def</span>
+        </pre></div>
+        """, test_text, extensions)
+        else:
+            self.assert_renders("""
+        <pre class="codehilite"><code class="language-python">def</code></pre>
+        """, test_text, extensions)
