@@ -59,14 +59,22 @@ class TestGfm(TestCase):
         """, ['gfm'])
 
     def test_hilite(self):
-        self.assert_renders("""
-        <div class="highlight"><pre><span class="k">def</span>
-        </pre></div>
-        """, """
+        test_text = """
         ```.python
         def
         ```
-        """, ['gfm'])
+        """
+        extensions = ['gfm']
+
+        if self.has_pygments:
+            self.assert_renders("""
+        <div class="highlight"><pre><span class="k">def</span>
+        </pre></div>
+        """, test_text, extensions)
+        else:
+            self.assert_renders("""
+        <pre class="highlight"><code class="language-python">def</code></pre>
+        """, test_text, extensions)
 
     def test_semi_sane_lists(self):
         self.assert_renders("""
