@@ -6,14 +6,22 @@ from test_case import TestCase
 
 class TestGfm(TestCase):
     def test_fenced_code(self):
-        self.assert_renders("""
-        <div class="highlight"><pre>foo
-        </pre></div>
-        """, """
+        test_text = """
         ```
         foo
         ```
-        """, ['gfm'])
+        """
+        extensions = ['gfm']
+        if self.has_pygments:
+            self.assert_renders("""
+        <div class="highlight"><pre>foo
+        </pre></div>
+        """, test_text, extensions)
+        else:
+            self.assert_renders("""
+        <pre class="highlight"><code>foo</code></pre>
+        """, test_text, extensions)
+            
 
     def test_nl2br(self):
         self.assert_renders("""
