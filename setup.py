@@ -10,7 +10,7 @@ setup(
     download_url='https://github.com/dart-lang/py-gfm/tarball/0.1.0',
     packages=find_packages(),
     include_package_data = True,
-    install_requires = ['setuptools', 'markdown', 'unittest2'],
+    install_requires = ['setuptools', 'markdown'],
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
